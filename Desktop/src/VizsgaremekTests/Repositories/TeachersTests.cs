@@ -22,6 +22,11 @@ namespace Vizsgaremek.Repositories.Tests
             Teachers teachers = new Teachers(applicationStore);
 
             Assert.IsNotNull(teachers.AllTeachers, "Repositories\\Teachers.css:A tanár lista nincs példányosítva!");
+
+            int expected = 6;
+            int actaul = teachers.GetAll().Count;
+
+            Assert.AreEqual(expected, actaul, "Repositories\\Teacher.css:A teszt adatok nem készülnek el megfelelő számban!");
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Vizsgaremek.Repositories
             }
 
             teachers = new List<Teacher>();
-            //teachers = GetAll();
+            teachers = GetAll();
         }
 
         public void MakeTestData()
