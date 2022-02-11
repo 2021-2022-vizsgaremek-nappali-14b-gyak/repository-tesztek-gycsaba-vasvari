@@ -12,5 +12,10 @@ namespace Vizsgaremek.Repositories
 {
     public partial class Teachers : IRepositoryAPIStringId<Teacher>
     {
+        bool IsTeacherCanInsert(Teacher teacher)
+        {
+            return false;
+        }
+
     }
 }
