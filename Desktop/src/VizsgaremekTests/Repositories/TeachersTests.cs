@@ -28,5 +28,29 @@ namespace Vizsgaremek.Repositories.Tests
 
             Assert.AreEqual(expected, actaul, "Repositories\\Teacher.css:A teszt adatok nem készülnek el megfelelő számban!");
         }
+
+        [TestMethod()]
+        public void InsertTest()
+        {
+            ApplicationStore applicationStore = new ApplicationStore();
+            applicationStore.DbSource = DbSource.NONE;
+            Teachers teachers = new Teachers(applicationStore);
+
+            Assert.IsNotNull(teachers.AllTeachers, "Repositories\\Teachers.css:A tanár lista nincs példányosítva!");
+            Teacher newTeacher = new Teacher()
+            {
+                Id = "20101111111",
+                FirstName = "Új",
+                LastName = "Tanár",
+                Password = "jelszó",
+                Meal = true,
+                Emploeyment = EmploymentValue.DONEONCOMMISSION,
+            };
+            // Tesztelni kell, hogy az új tanár azonosítója rendbe van-e
+
+            // Felvesszük a tanár a listába és növekszik-e a tanárok száma
+
+            // Úgy került bele az új tanár a listába, hogy minden adata megvan
+        }
     }
 }
