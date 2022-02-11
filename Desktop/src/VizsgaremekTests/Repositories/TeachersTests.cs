@@ -49,7 +49,7 @@ namespace Vizsgaremek.Repositories.Tests
             Teacher newNotCanInsertTeacher = new Teacher()
             {
                 Id = "10101111111",
-                FirstName = "Új",
+                FirstName = "Nem Felvehető",
                 LastName = "Tanár",
                 Password = "jelszó",
                 Meal = true,
@@ -62,6 +62,11 @@ namespace Vizsgaremek.Repositories.Tests
             int catInsertTeacherActaul = teachers.AllTeachers.Count();
             Assert.AreEqual(canInsertTeacherExpected, catInsertTeacherActaul, "Repositories\\Teachers:Felvehető tanár felvétele esetén nem növekszik a tanárok száma a repoban!");
             // 2. A tanár nem vehető fel
+            teachers.Insert(newNotCanInsertTeacher);
+            int numberOfTeacherWithIdExptected =
+                teachers.AllTeachers.FindAll(teacher => teacher.Id == newCanInsertTeacher.Id).Count;
+            int numberOfTeacherWithIdActual = 1;
+            Assert.AreEqual(numberOfTeacherWithIdExptected, numberOfTeacherWithIdActual, "Repositories\\Teachers:Egy Id-ből több is van a listába amikor olyan tanár veszük fel, akinek az ID-je már szerepel a listába");
 
             // Felvesszük a tanár a listába és növekszik-e a tanárok száma
 
