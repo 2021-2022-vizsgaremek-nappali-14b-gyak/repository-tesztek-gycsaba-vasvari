@@ -37,7 +37,7 @@ namespace Vizsgaremek.Repositories.Tests
             Teachers teachers = new Teachers(applicationStore);
 
             Assert.IsNotNull(teachers.AllTeachers, "Repositories\\Teachers.css:A tanár lista nincs példányosítva!");
-            Teacher newTeacher = new Teacher()
+            Teacher newCanInsertTeacher = new Teacher()
             {
                 Id = "20101111111",
                 FirstName = "Új",
@@ -46,7 +46,22 @@ namespace Vizsgaremek.Repositories.Tests
                 Meal = true,
                 Emploeyment = EmploymentValue.DONEONCOMMISSION,
             };
+            Teacher newNotCanInsertTeacher = new Teacher()
+            {
+                Id = "10101111111",
+                FirstName = "Új",
+                LastName = "Tanár",
+                Password = "jelszó",
+                Meal = true,
+                Emploeyment = EmploymentValue.DONEONCOMMISSION,
+            };
             // Tesztelni kell, hogy az új tanár azonosítója rendbe van-e
+            // 1. A tanár felvehető
+            teachers.Insert(newCanInsertTeacher);
+            int canInsertTeacherExpected = 7;
+            int catInsertTeacherActaul = teachers.AllTeachers.Count();
+            Assert.AreEqual(canInsertTeacherExpected, catInsertTeacherActaul, "Repositories\\Teachers:Felvehető tanár felvétele esetén nem növekszik a tanárok száma a repoban!");
+            // 2. A tanár nem vehető fel
 
             // Felvesszük a tanár a listába és növekszik-e a tanárok száma
 
