@@ -57,12 +57,27 @@ namespace Vizsgaremek.Repositories.Tests
             };
             // Tesztelni kell, hogy az új tanár azonosítója rendbe van-e
             // 1. A tanár felvehető
-            teachers.Insert(newCanInsertTeacher);
+            try
+            {
+                teachers.Insert(newCanInsertTeacher);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("Repositories\\Teachers:Fevehető tanár esetén, az Insert kivételt dob.\n" + e.Message);
+            }
             int canInsertTeacherExpected = 7;
             int catInsertTeacherActaul = teachers.AllTeachers.Count();
             Assert.AreEqual(canInsertTeacherExpected, catInsertTeacherActaul, "Repositories\\Teachers:Felvehető tanár felvétele esetén nem növekszik a tanárok száma a repoban!");
             // 2. A tanár nem vehető fel
-            teachers.Insert(newNotCanInsertTeacher);
+            // 1. A tanár felvehető
+            try
+            {
+                teachers.Insert(newNotCanInsertTeacher);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("Repositories\\Teachers:Nem felvehető tanár esetén, az Insert kivételt dob.\n" + e.Message);
+            }
             int numberOfTeacherWithIdExptected =
                 teachers.AllTeachers.FindAll(teacher => teacher.Id == newCanInsertTeacher.Id).Count;
             int numberOfTeacherWithIdActual = 1;
