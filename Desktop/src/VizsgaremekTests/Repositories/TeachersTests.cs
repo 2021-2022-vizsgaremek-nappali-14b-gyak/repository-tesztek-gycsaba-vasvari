@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Vizsgaremek.Stores;
+using Vizsgaremek.Models;
+
 namespace Vizsgaremek.Repositories.Tests
 {
     [TestClass()]
@@ -14,7 +17,11 @@ namespace Vizsgaremek.Repositories.Tests
         [TestMethod()]
         public void GetAllTest()
         {
-            Assert.Fail();
+            ApplicationStore applicationStore = new ApplicationStore();
+            applicationStore.DbSource = DbSource.NONE;
+            Teachers teachers = new Teachers(applicationStore);
+
+            Assert.IsNotNull(teachers.AllTeachers, "Repositories\\Teachers.css:A tanár lista nincs példányosítva!");
         }
     }
 }
