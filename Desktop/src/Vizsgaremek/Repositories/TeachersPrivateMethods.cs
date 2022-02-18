@@ -20,5 +20,9 @@ namespace Vizsgaremek.Repositories
         private void InsertTeacherToTestData(Teacher teacher)
         {
         }
+
+        private bool FindTeacherWithId(string id)
+        {
+        }
     }
 }
