@@ -21,8 +21,10 @@ namespace Vizsgaremek.Repositories
                     MakeTestData();
                     break;
                 case DbSource.LOCALHOST:
+                    teachers.Clear();
                     break;
                 case DbSource.DEVOPS:
+                    teachers.Clear();
                     break;
             }
             return teachers;
