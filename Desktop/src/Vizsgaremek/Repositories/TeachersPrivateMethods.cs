@@ -23,6 +23,14 @@ namespace Vizsgaremek.Repositories
 
         private bool FindTeacherWithId(string id)
         {
+            foreach (Teacher teacher in teachers)
+            {
+                if (teacher.Id.CompareTo(id) == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
