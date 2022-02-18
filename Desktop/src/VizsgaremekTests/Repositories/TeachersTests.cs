@@ -65,11 +65,16 @@ namespace Vizsgaremek.Repositories.Tests
             {
                 Assert.Fail("Repositories\\Teachers:Fevehető tanár esetén, az Insert kivételt dob.\n" + e.Message);
             }
+            // Ha a tanár felvehető akkor a tanárok száma egyel kell hogy növekedjen
             int canInsertTeacherExpected = 7;
-            int catInsertTeacherActaul = teachers.AllTeachers.Count();
-            Assert.AreEqual(canInsertTeacherExpected, catInsertTeacherActaul, "Repositories\\Teachers:Felvehető tanár felvétele esetén nem növekszik a tanárok száma a repoban!");
-            // 2. A tanár nem vehető fel
-            // 1. A tanár felvehető
+            int canInsertTeacherActaul = teachers.AllTeachers.Count();
+            Assert.AreEqual(canInsertTeacherExpected, canInsertTeacherActaul, "Repositories\\Teachers:Felvehető tanár felvétele esetén nem növekszik a tanárok száma a repoban!");
+            // A felvett tanár benne kell legyen a listába
+            Teacher insertedTeacherExpected = newCanInsertTeacher;
+            Teacher insertedTeacherActaul = teachers.AllTeachers.Find(teacher => teacher == newCanInsertTeacher);
+            Assert.AreEqual(insertedTeacherExpected, insertedTeacherActaul, "\\Repositories\\Techers:A felvehető tanár, nem lett felvéve,  nincs a listában");
+
+            //2. a tanár nem vehető fel
             try
             {
                 teachers.Insert(newNotCanInsertTeacher);
@@ -82,10 +87,6 @@ namespace Vizsgaremek.Repositories.Tests
                 teachers.AllTeachers.FindAll(teacher => teacher.Id == newCanInsertTeacher.Id).Count;
             int numberOfTeacherWithIdActual = 1;
             Assert.AreEqual(numberOfTeacherWithIdExptected, numberOfTeacherWithIdActual, "Repositories\\Teachers:Egy Id-ből több is van a listába amikor olyan tanár veszük fel, akinek az ID-je már szerepel a listába");
-
-            // Felvesszük a tanár a listába és növekszik-e a tanárok száma
-
-            // Úgy került bele az új tanár a listába, hogy minden adata megvan
         }
     }
 }
