@@ -22,6 +22,10 @@ namespace Vizsgaremek.Repositories
 
         private void InsertTeacherToTestData(Teacher teacher)
         {
+            if (IsTeacherCanInsert(teacher))
+            {
+                teachers.Add(teacher);
+            }
         }
 
         private bool FindTeacherWithId(string id)
