@@ -17,5 +17,8 @@ namespace Vizsgaremek.Repositories
             return false;
         }
 
+        private void InsertTeacherToTestData(Teacher teacher)
+        {
+        }
     }
 }
