@@ -55,6 +55,9 @@ namespace Vizsgaremek.Repositories
         {
             if (applicationStore.DbSource == DbSource.NONE)
             {
+                // Ha az első tesztadatunk benne van a listába
+                // akkor nem frissítjük a listát.
+                // A parméter az első tesztadat ID-ja
                 if (!FindTeacherWithId("10101111111"))
                     teachers = GetAll();                
             }
