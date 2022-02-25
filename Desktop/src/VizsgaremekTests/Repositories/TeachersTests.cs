@@ -84,7 +84,7 @@ namespace Vizsgaremek.Repositories.Tests
                 Assert.Fail("Repositories\\Teachers:Nem felvehető tanár esetén, az Insert kivételt dob.\n" + e.Message);
             }
             int numberOfTeacherWithIdExptected =
-                teachers.AllTeachers.FindAll(teacher => teacher.Id == newCanInsertTeacher.Id).Count;
+                teachers.AllTeachers.FindAll(teacher => teacher.Id == newNotCanInsertTeacher.Id).Count;
             int numberOfTeacherWithIdActual = 1;
             Assert.AreEqual(numberOfTeacherWithIdExptected, numberOfTeacherWithIdActual, "Repositories\\Teachers:Egy Id-ből több is van a listába amikor olyan tanár veszük fel, akinek az ID-je már szerepel a listába");
         }

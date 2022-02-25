@@ -12,20 +12,20 @@ namespace Vizsgaremek.Repositories
 {
     public partial class Teachers : IRepositoryAPIStringId<Teacher>
     {
-        bool IsTeacherCanInsert(Teacher teacher)
-        {
-            if (FindTeacherWithId(teacher.Id))
-                return false;
-            else
-                return true;
-        }
-
         private void InsertTeacherToTestData(Teacher teacher)
         {
             if (IsTeacherCanInsert(teacher))
             {
                 teachers.Add(teacher);
             }
+        }
+
+        bool IsTeacherCanInsert(Teacher teacher)
+        {
+            if (FindTeacherWithId(teacher.Id))
+                return false;
+            else
+                return true;
         }
 
         private bool FindTeacherWithId(string id)
