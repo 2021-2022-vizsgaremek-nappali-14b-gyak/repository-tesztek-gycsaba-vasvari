@@ -77,21 +77,38 @@ namespace Vizsgaremek.Models
         {
             if (obj is Teacher)
             {
-                Teacher other = (Teacher)obj;
+                Teacher other = (Teacher) obj;
                 // 0-át adunk vissza a this megegyezik az obj
-                if ((other.id == this.id) &&
-                    (other.firstName == this.firstName))
+                if (IsSame(other))
                     return 0;
                 else
                 {
                     // más esetben az elsődleges összehasonlítás legyen vezetéknév
                     // ha a vezetéknév megegyezik akkor keresztév
                     // ha az is megegyezik id
-                    return -1;
+                    int compareToLastName = this.lastName.CompareTo(other.lastName);
+                    if (compareToLastName != 0)
+                        return compareToLastName;
+                    int compareToFirstName = this.firstName.CompareTo(other.firstName);
+                    if (compareToFirstName != 0)
+                        return compareToFirstName;
+                    return this.id.CompareTo(other.id);
+
+
                 }
             }
             else
                 return -1;
+        }
+
+        private bool IsSame(Teacher other)
+        {
+            if ((other.id == this.id) &&
+                (other.firstName == this.firstName) &&
+                (other.lastName == this.lastName))
+                return true;
+            else
+                return false;
         }
     }
 }
