@@ -8,7 +8,7 @@ namespace Vizsgaremek.Models
 {
     public enum EmploymentValue { LECTURER, INDENTUREDLABOURER, DONEONCOMMISSION }
 
-    public class Teacher
+    public class Teacher : IComparable
     {
         private string id;
         private string lastName;
@@ -71,6 +71,27 @@ namespace Vizsgaremek.Models
                 else
                     emploeyment = EmploymentValue.DONEONCOMMISSION;
             }
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Teacher)
+            {
+                Teacher other = (Teacher)obj;
+                // 0-át adunk vissza a this megegyezik az obj
+                if ((other.id == this.id) &&
+                    (other.firstName == this.firstName))
+                    return 0;
+                else
+                {
+                    // más esetben az elsődleges összehasonlítás legyen vezetéknév
+                    // ha a vezetéknév megegyezik akkor keresztév
+                    // ha az is megegyezik id
+                    return -1;
+                }
+            }
+            else
+                return -1;
         }
     }
 }
