@@ -88,5 +88,33 @@ namespace Vizsgaremek.Repositories.Tests
             int numberOfTeacherWithIdActual = 1;
             Assert.AreEqual(numberOfTeacherWithIdExptected, numberOfTeacherWithIdActual, "Repositories\\Teachers:Egy Id-ből több is van a listába amikor olyan tanár veszük fel, akinek az ID-je már szerepel a listába");
         }
+
+        [TestMethod()]
+        public void UpdateTest()
+        {
+            ApplicationStore applicationStore = new ApplicationStore();
+            applicationStore.DbSource = DbSource.NONE;
+            Teachers teachers = new Teachers(applicationStore);
+
+            Assert.IsNotNull(teachers.AllTeachers, "Repositories\\Teachers.css:A tanár lista nincs példányosítva!");
+            // arrange
+            string updatedTeacherId = "10101111115";
+            Teacher updatedTeacherData = new Teacher()
+            {
+                Id = "10101111115",
+                FirstName = "Módosított",
+                LastName = "Tanár",
+                Password = "új jelszó",
+                Meal = false,
+                Emploeyment = EmploymentValue.INDENTUREDLABOURER,
+            };
+            // Mit teszteljük
+            //1. A tanárok száma nem változott
+
+            //2. Létezik-e a tanár
+            //3. Módosult-e a tanár (a tanárnak új adatai vannak)
+
+
+        }
     }
 }
