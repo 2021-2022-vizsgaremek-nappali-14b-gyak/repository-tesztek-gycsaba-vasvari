@@ -108,13 +108,26 @@ namespace Vizsgaremek.Repositories.Tests
                 Meal = false,
                 Emploeyment = EmploymentValue.INDENTUREDLABOURER,
             };
+            try
+            {
+                teachers.Update(updatedTeacherId, updatedTeacherData);
+            }
+            catch(Exception) { }
             // Mit teszteljük
             //1. A tanárok száma nem változott
-
+            int expected = 6;
+            int actaul = teachers.AllTeachers.Count;
+            Assert.AreEqual(expected, actaul, "Módostás után a tanárok száma változik!");
             //2. Létezik-e a tanár
-            //3. Módosult-e a tanár (a tanárnak új adatai vannak)
-
-
+            Teacher teacher = teachers.AllTeachers.Find(teacher => teacher.Id == updatedTeacherId);
+            string expectedID = updatedTeacherId;
+            string actualID = teacher.Id;
+            int result = expectedID.CompareTo(actualID);
+            Assert.AreEqual(0, result, "Módosított tanár id-ja megváltozott, vagy nincs ilyen tanár.");
+            //3. Módosult-e a tanár 
+            bool expectedEqual = true;
+            bool actaulEqual = updatedTeacherData.Equals(teacher);
+            Assert.AreEqual(expectedEqual, actaulEqual, "Módosítás után valamelyik adat nem módosult.");
         }
     }
 }
