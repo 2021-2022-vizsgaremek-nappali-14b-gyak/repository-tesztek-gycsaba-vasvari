@@ -8,7 +8,7 @@ namespace Vizsgaremek.Models
 {
     public enum EmploymentValue { LECTURER, INDENTUREDLABOURER, DONEONCOMMISSION }
 
-    public class Teacher
+    public class Teacher : IComparable
     {
         private string id;
         private string lastName;
@@ -71,6 +71,14 @@ namespace Vizsgaremek.Models
                 else
                     emploeyment = EmploymentValue.DONEONCOMMISSION;
             }
+        }
+        public override bool Equals(object obj)
+        {
+            return false;
+        }
+        public int CompareTo(object obj)
+        {
+            return 0;
         }
     }
 }
