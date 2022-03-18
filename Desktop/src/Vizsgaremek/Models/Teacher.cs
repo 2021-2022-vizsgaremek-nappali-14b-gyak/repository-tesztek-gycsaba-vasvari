@@ -111,7 +111,25 @@ namespace Vizsgaremek.Models
 
         public override bool Equals(object obj)
         {
-            return false;
+            if (obj is Teacher)
+            {
+                Teacher other = (Teacher)obj;
+
+                bool sortingEqal = this.IsSameWhenSorting(other);
+                if (sortingEqal == false)
+                    return false;
+                else
+                {
+                    if ((other.password == this.password) &&
+                        (other.Meal == this.meal) &&
+                        (other.emploeyment == this.emploeyment))
+                        return true;
+                    return
+                        false;
+                }
+            }
+            else
+                return false;
         }
     }
 }
