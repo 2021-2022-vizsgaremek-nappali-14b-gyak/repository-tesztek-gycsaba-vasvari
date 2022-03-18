@@ -93,8 +93,6 @@ namespace Vizsgaremek.Models
                     if (compareToFirstName != 0)
                         return compareToFirstName;
                     return this.id.CompareTo(other.id);
-
-
                 }
             }
             else

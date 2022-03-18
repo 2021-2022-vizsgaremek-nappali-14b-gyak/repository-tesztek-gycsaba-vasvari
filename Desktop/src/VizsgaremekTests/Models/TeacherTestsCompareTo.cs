@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Vizsgaremek.Models.Tests
 {
     [TestClass()]
-    public class TeacherTests
+    public class TeacherTestsCompareTo
     {
         // 1. A két tanár megegyezik->0
         [TestMethod()]
@@ -67,7 +67,7 @@ namespace Vizsgaremek.Models.Tests
                 Meal = true,
                 Emploeyment = EmploymentValue.DONEONCOMMISSION,
             };
-            int expected = 1;
+            int expected = -1;
 
             // act
             int actual = teacher.CompareTo(other);
