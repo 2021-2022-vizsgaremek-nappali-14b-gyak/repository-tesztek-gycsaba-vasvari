@@ -79,7 +79,7 @@ namespace Vizsgaremek.Models
             {
                 Teacher other = (Teacher) obj;
                 // 0-át adunk vissza a this megegyezik az obj
-                if (IsSame(other))
+                if (this.IsSameWhenSorting(other))
                     return 0;
                 else
                 {
@@ -99,7 +99,7 @@ namespace Vizsgaremek.Models
                 return -1;
         }
 
-        private bool IsSame(Teacher other)
+        public bool IsSameWhenSorting(Teacher other)
         {
             if ((other.id == this.id) &&
                 (other.firstName == this.firstName) &&
@@ -107,6 +107,11 @@ namespace Vizsgaremek.Models
                 return true;
             else
                 return false;
+        }
+
+        public bool IsSame(Teacher other)
+        {
+            return false;
         }
     }
 }
