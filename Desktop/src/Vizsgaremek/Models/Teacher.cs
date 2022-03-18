@@ -130,15 +130,6 @@ namespace Vizsgaremek.Models
             }
             else
                 return false;
-
-        public override bool Equals(object obj)
-        {
-            return false;
-        }
-        public int CompareTo(object obj)
-        {
-            return 0;
-
         }
     }
 }
