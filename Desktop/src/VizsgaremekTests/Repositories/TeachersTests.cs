@@ -97,6 +97,35 @@ namespace Vizsgaremek.Repositories.Tests
             Teachers teachers = new Teachers(applicationStore);
 
             Assert.IsNotNull(teachers.AllTeachers, "Repositories\\Teachers.css:A tanár lista nincs példányosítva!");
+
+            // 1. a keresett tanár nem található
+            // "12345678901"
+            string wrongId = "12345678901";
+            // Teszt: módosítás után evvel az ID-val nincs tanár
+            // FindAll-al keresünk wrongID-jü tanárt -> teszt: ilyen tanárok száma nulla
+
+            // 2. a kereset tanár megtalálható
+            // a) módosítás után megkeressük a módosított tanárt
+            // b) minden adata meg kell egyezzen a módosításkor használt tanáradatokkal
+            string rightId = "10101111113";
+            Teacher newTeacherData = new Teacher()
+            {
+                Id = "10101111113",
+                FirstName = "Módosított",
+                LastName = "Tanár",
+                Password = "újjelszó",
+                Meal = false,
+                Emploeyment = EmploymentValue.LECTURER,
+            };
+
+             List<Teacher> modifiedTeachers = teachers.AllTeachers.FindAll(teacher => teacher.Id == rightId);
+            // teszt: ilyen tanárok száma nem egy
+
+            // teszt: ha van ilyen tanár, akkor minden adata meg kell egyezen a newTeacherData
+            // metódust kell írni a Teacher osztályba ComperTo
+            // teszt: newTeacherData megegyezik-e (ComperTo) a talált tanár adataival
+            Teacher modifiedTeacher = teachers.AllTeachers.Find(teacher => teacher.Id == rightId);
+
             // arrange
             string updatedTeacherId = "10101111115";
             Teacher updatedTeacherData = new Teacher()

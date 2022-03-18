@@ -72,6 +72,65 @@ namespace Vizsgaremek.Models
                     emploeyment = EmploymentValue.DONEONCOMMISSION;
             }
         }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Teacher)
+            {
+                Teacher other = (Teacher) obj;
+                // 0-át adunk vissza a this megegyezik az obj
+                if (this.IsSameWhenSorting(other))
+                    return 0;
+                else
+                {
+                    // más esetben az elsődleges összehasonlítás legyen vezetéknév
+                    // ha a vezetéknév megegyezik akkor keresztév
+                    // ha az is megegyezik id
+                    int compareToLastName = this.lastName.CompareTo(other.lastName);
+                    if (compareToLastName != 0)
+                        return compareToLastName;
+                    int compareToFirstName = this.firstName.CompareTo(other.firstName);
+                    if (compareToFirstName != 0)
+                        return compareToFirstName;
+                    return this.id.CompareTo(other.id);
+                }
+            }
+            else
+                return -1;
+        }
+
+        public bool IsSameWhenSorting(Teacher other)
+        {
+            if ((other.id == this.id) &&
+                (other.firstName == this.firstName) &&
+                (other.lastName == this.lastName))
+                return true;
+            else
+                return false;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Teacher)
+            {
+                Teacher other = (Teacher)obj;
+
+                bool sortingEqal = this.IsSameWhenSorting(other);
+                if (sortingEqal == false)
+                    return false;
+                else
+                {
+                    if ((other.password == this.password) &&
+                        (other.Meal == this.meal) &&
+                        (other.emploeyment == this.emploeyment))
+                        return true;
+                    return
+                        false;
+                }
+            }
+            else
+                return false;
+
         public override bool Equals(object obj)
         {
             return false;
@@ -79,6 +138,7 @@ namespace Vizsgaremek.Models
         public int CompareTo(object obj)
         {
             return 0;
+
         }
     }
 }
