@@ -97,6 +97,7 @@ namespace Vizsgaremek.Repositories.Tests
             Teachers teachers = new Teachers(applicationStore);
 
             Assert.IsNotNull(teachers.AllTeachers, "Repositories\\Teachers.css:A tanár lista nincs példányosítva!");
+
             // 1. a keresett tanár nem található
             // "12345678901"
             string wrongId = "12345678901";
@@ -124,6 +125,38 @@ namespace Vizsgaremek.Repositories.Tests
             // metódust kell írni a Teacher osztályba ComperTo
             // teszt: newTeacherData megegyezik-e (ComperTo) a talált tanár adataival
             Teacher modifiedTeacher = teachers.AllTeachers.Find(teacher => teacher.Id == rightId);
+
+            // arrange
+            string updatedTeacherId = "10101111115";
+            Teacher updatedTeacherData = new Teacher()
+            {
+                Id = "10101111115",
+                FirstName = "Módosított",
+                LastName = "Tanár",
+                Password = "új jelszó",
+                Meal = false,
+                Emploeyment = EmploymentValue.INDENTUREDLABOURER,
+            };
+            try
+            {
+                teachers.Update(updatedTeacherId, updatedTeacherData);
+            }
+            catch(Exception) { }
+            // Mit teszteljük
+            //1. A tanárok száma nem változott
+            int expected = 6;
+            int actaul = teachers.AllTeachers.Count;
+            Assert.AreEqual(expected, actaul, "Módostás után a tanárok száma változik!");
+            //2. Létezik-e a tanár
+            Teacher teacher = teachers.AllTeachers.Find(teacher => teacher.Id == updatedTeacherId);
+            string expectedID = updatedTeacherId;
+            string actualID = teacher.Id;
+            int result = expectedID.CompareTo(actualID);
+            Assert.AreEqual(0, result, "Módosított tanár id-ja megváltozott, vagy nincs ilyen tanár.");
+            //3. Módosult-e a tanár 
+            bool expectedEqual = true;
+            bool actaulEqual = updatedTeacherData.Equals(teacher);
+            Assert.AreEqual(expectedEqual, actaulEqual, "Módosítás után valamelyik adat nem módosult.");
         }
     }
 }
