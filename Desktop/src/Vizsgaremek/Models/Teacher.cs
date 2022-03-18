@@ -109,7 +109,7 @@ namespace Vizsgaremek.Models
                 return false;
         }
 
-        public bool IsSame(Teacher other)
+        public override bool Equals(object obj)
         {
             return false;
         }
