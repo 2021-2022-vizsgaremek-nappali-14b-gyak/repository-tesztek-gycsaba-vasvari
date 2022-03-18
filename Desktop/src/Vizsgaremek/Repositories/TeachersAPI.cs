@@ -50,7 +50,7 @@ namespace Vizsgaremek.Repositories
             switch (applicationStore.DbSource)
             {
                 case DbSource.NONE:
-                    InsertTeacherToTestData(entity);
+                    InsertTeacherInTestData(entity);
                     break;
                 case DbSource.LOCALHOST:
                     break;
@@ -64,6 +64,7 @@ namespace Vizsgaremek.Repositories
             switch (applicationStore.DbSource)
             {
                 case DbSource.NONE:
+                    UpdateTeacherInTestData(id, entity);
                     break;
                 case DbSource.LOCALHOST:
                     break;
@@ -71,7 +72,6 @@ namespace Vizsgaremek.Repositories
                     break;
             }
         }
-
         public void Delete(string id)
         {
             switch (applicationStore.DbSource)

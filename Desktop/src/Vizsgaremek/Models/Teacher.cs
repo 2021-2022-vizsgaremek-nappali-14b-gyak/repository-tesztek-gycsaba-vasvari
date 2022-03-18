@@ -29,6 +29,7 @@ namespace Vizsgaremek.Models
                 this.Emploeyment = EmploymentValue.DONEONCOMMISSION;
             }
         }
+
         public Teacher(string id, string lastname, string firstname, string password, bool meal, EmploymentValue emploeyment)
         {
             this.id = id;
@@ -121,7 +122,7 @@ namespace Vizsgaremek.Models
                 else
                 {
                     if ((other.password == this.password) &&
-                        (other.Meal == this.meal) &&
+                        (other.meal == this.meal) &&
                         (other.emploeyment == this.emploeyment))
                         return true;
                     return
@@ -130,6 +131,16 @@ namespace Vizsgaremek.Models
             }
             else
                 return false;
+        }
+
+        public void Set(Teacher entity)
+        {
+            this.id = entity.id;
+            this.lastName = entity.lastName;
+            this.firstName = entity.firstName;
+            this.password = entity.password;
+            this.meal = entity.meal;
+            this.emploeyment = entity.emploeyment;            
         }
     }
 }
